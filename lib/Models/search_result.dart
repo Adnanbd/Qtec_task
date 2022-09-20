@@ -19,7 +19,7 @@ class SearchResult {
   Data data;
 
   factory SearchResult.fromJson(Map<String, dynamic> json) => SearchResult(
-        status: json["status"],
+        status: json["status"] ?? "",
         data: Data.fromJson(json["data"]),
       );
 
@@ -57,15 +57,15 @@ class Products {
     required this.results,
   });
 
-  int count;
+  num count;
   String next;
   String previous;
   List<Result> results;
 
   factory Products.fromJson(Map<String, dynamic> json) => Products(
         count: json["count"],
-        next: json["next"],
-        previous: json["previous"],
+        next: json["next"] ?? "",
+        previous: json["previous"] ?? "",
         results:
             List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
       );
@@ -118,7 +118,7 @@ class Result {
     required this.filterValue,
   });
 
-  int id;
+  num id;
   Brand brand;
   String image;
   Charge charge;
@@ -132,13 +132,13 @@ class Result {
   String description;
   String note;
   String embaddedVideoLink;
-  int maximumOrder;
-  int stock;
+  num maximumOrder;
+  num stock;
   bool isBackOrder;
   String specification;
   String warranty;
   bool preOrder;
-  int productReview;
+  num productReview;
   bool isSeller;
   bool isPhone;
   bool willShowEmi;
@@ -151,45 +151,45 @@ class Result {
   dynamic combo;
   String createdBy;
   dynamic updatedBy;
-  List<int> category;
+  List<num> category;
   List<dynamic> relatedProduct;
   List<dynamic> filterValue;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         brand: Brand.fromJson(json["brand"]),
-        image: json["image"],
+        image: json["image"] ?? "",
         charge: Charge.fromJson(json["charge"]),
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-        slug: json["slug"],
-        productName: json["product_name"],
-        model: json["model"],
-        commissionType: json["commission_type"],
-        amount: json["amount"],
-        tag: json["tag"],
-        description: json["description"],
-        note: json["note"],
-        embaddedVideoLink: json["embadded_video_link"],
+        slug: json["slug"] ?? "",
+        productName: json["product_name"] ?? "",
+        model: json["model"] ?? "",
+        commissionType: json["commission_type"] ?? "",
+        amount: json["amount"] ?? "",
+        tag: json["tag"] ?? "",
+        description: json["description"] ?? "",
+        note: json["note"] ?? "",
+        embaddedVideoLink: json["embadded_video_link"] ?? "",
         maximumOrder: json["maximum_order"],
         stock: json["stock"],
         isBackOrder: json["is_back_order"],
-        specification: json["specification"],
-        warranty: json["warranty"],
+        specification: json["specification"] ?? "",
+        warranty: json["warranty"] ?? "",
         preOrder: json["pre_order"],
         productReview: json["product_review"],
         isSeller: json["is_seller"],
         isPhone: json["is_phone"],
         willShowEmi: json["will_show_emi"],
-        badge: json["badge"],
+        badge: json["badge"] ?? "",
         isActive: json["is_active"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        language: json["language"],
-        seller: json["seller"],
-        combo: json["combo"],
-        createdBy: json["created_by"],
-        updatedBy: json["updated_by"],
-        category: List<int>.from(json["category"].map((x) => x)),
+        language: json["language"] ?? "",
+        seller: json["seller"] ?? "",
+        combo: json["combo"] ?? "",
+        createdBy: json["created_by"] ?? "",
+        updatedBy: json["updated_by"] ?? "",
+        category: List<num>.from(json["category"].map((x) => x)),
         relatedProduct:
             List<dynamic>.from(json["related_product"].map((x) => x)),
         filterValue: List<dynamic>.from(json["filter_value"].map((x) => x)),
@@ -251,7 +251,7 @@ class Brand {
   factory Brand.fromJson(Map<String, dynamic> json) => Brand(
         name: json["name"],
         image: json["image"],
-        headerImage: json["header_image"],
+        headerImage: json["header_image"] ?? "",
         slug: json["slug"],
       );
 
@@ -281,11 +281,11 @@ class Charge {
     required this.message,
   });
 
-  int bookingPrice;
-  int currentCharge;
+  num bookingPrice;
+  num currentCharge;
   dynamic discountCharge;
-  int sellingPrice;
-  int profit;
+  num sellingPrice;
+  num profit;
   bool isEvent;
   dynamic eventId;
   bool highlight;
@@ -299,18 +299,18 @@ class Charge {
   factory Charge.fromJson(Map<String, dynamic> json) => Charge(
         bookingPrice: json["booking_price"],
         currentCharge: json["current_charge"],
-        discountCharge: json["discount_charge"],
+        discountCharge: json["discount_charge"] ?? "",
         sellingPrice: json["selling_price"],
         profit: json["profit"],
         isEvent: json["is_event"],
-        eventId: json["event_id"],
+        eventId: json["event_id"] ?? "",
         highlight: json["highlight"],
-        highlightId: json["highlight_id"],
+        highlightId: json["highlight_id"] ?? "",
         groupping: json["groupping"],
-        grouppingId: json["groupping_id"],
-        campaignSectionId: json["campaign_section_id"],
+        grouppingId: json["groupping_id"] ?? "",
+        campaignSectionId: json["campaign_section_id"] ?? "",
         campaignSection: json["campaign_section"],
-        message: json["message"],
+        message: json["message"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -339,10 +339,10 @@ class Image {
     required this.product,
   });
 
-  int id;
+  num id;
   String image;
   bool isPrimary;
-  int product;
+  num product;
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
         id: json["id"],
