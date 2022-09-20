@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qtec_task/Bloc/cubit/search_result_cubit.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
 import 'package:qtec_task/Utils/custom_values.dart';
+import 'package:qtec_task/Widgets/custom_search_bar.dart';
 
 class SearchProductScreen extends StatelessWidget {
   const SearchProductScreen({Key? key}) : super(key: key);
@@ -28,60 +29,48 @@ class SearchProductScreen extends StatelessWidget {
           } else if (state is SearchResultCompleted) {
             return Container(
               alignment: Alignment.center,
+              height: heightMain,
+              width: widthMain,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: widthMain * .9,
-                        height: 55,
-                        padding: const EdgeInsets.only(
-                            left: 25, right: 65, top: 0, bottom: 0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: CustomColors.whiteColor,
-                          borderRadius: CustomValues.textFieldBorderRadius,
+                  CustomSearchBar(),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: 30,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 3 / 5,
+                          mainAxisSpacing: 20
                         ),
-                        child: TextField(
-                          autofocus: true,
-                          textAlign: TextAlign.left,
-                          cursorHeight: 20,
-                          style: GoogleFonts.balooDa2(
-                            fontSize: 16,
-                            color: CustomColors.blackColor,
-                          ),
-                          controller: TextEditingController(),
-                          decoration: const InputDecoration(
-                            fillColor: Colors.transparent,
-                            contentPadding: EdgeInsets.zero,
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            focusedErrorBorder: InputBorder.none,
-                          ),
-                        ),
+                        itemBuilder: ((context, index) {
+                          return Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: CustomColors.whiteColor,
+                              borderRadius: BorderRadius.circular(15)
+                            ),
+                            child: Column(
+                              children: [
+                                
+                              ],
+                            ),
+                          );
+                        }),
                       ),
-                      Positioned(
-                        right: 20,
-                        child: SvgPicture.asset(
-                          "assets/search-icon.svg",
-                          height: 26,
-                          width: 26,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
             );
           } else {
-            return Text("Nothing Happend");
+            return const Text("Nothing Happend");
           }
         },
       ),
