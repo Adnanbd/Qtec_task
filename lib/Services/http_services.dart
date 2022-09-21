@@ -17,7 +17,7 @@ class HttpService {
       print("111 Body = ${response.body}");
 
       if (response.statusCode == 200) {
-        SearchResult result = SearchResult.fromJson(jsonDecode(response.body));
+        SearchResult result = SearchResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
         return result;
       } else {
         throw "Unable to get the result";

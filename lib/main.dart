@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<SearchResultCubit>(
           create: (context) => SearchResultCubit(
             httpService: httpService,
-          )..getSearchResult(limit: 10, offset: 10, searchText: "Rice"),
+          ),
         ),
       ],
       child: MaterialApp(
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SearchProductScreen(),
+        home: SearchProductScreen(),
       ),
     );
   }

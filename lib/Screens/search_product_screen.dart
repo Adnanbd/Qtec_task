@@ -12,7 +12,7 @@ import 'package:qtec_task/Widgets/custom_text_3.dart';
 import 'package:qtec_task/Widgets/product_preview_tile.dart';
 
 class SearchProductScreen extends StatelessWidget {
-  const SearchProductScreen({Key? key}) : super(key: key);
+  SearchProductScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +26,32 @@ class SearchProductScreen extends StatelessWidget {
       ),
       body: BlocBuilder<SearchResultCubit, SearchResultState>(
         builder: (context, state) {
-          if (state is SearchResultLoading) {
+          if (state is SearchResultInitial) {
+            return Container(
+              alignment: Alignment.center,
+              height: heightMain,
+              width: widthMain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomSearchBar(),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Center(
+                    child: Text("Type Something ..."),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is SearchResultLoading) {
             return const CircularProgressIndicator();
           } else if (state is SearchResultError) {
             return Center(child: Text(state.error));
           } else if (state is SearchResultCompleted) {
+            print(
+                ">> Total Product >> ${state.searchResult.data.products.count}");
             return Container(
               alignment: Alignment.center,
               height: heightMain,
@@ -49,7 +70,8 @@ class SearchProductScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: GridView.builder(
                           shrinkWrap: true,
-                          itemCount: 30,
+                          itemCount:
+                              state.searchResult.data.products.results.length,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
@@ -57,7 +79,12 @@ class SearchProductScreen extends StatelessWidget {
                                   childAspectRatio: 3 / 5,
                                   mainAxisSpacing: 10),
                           itemBuilder: ((context, index) {
-                            return ProductPreviewTile();
+                            print(state
+                                  .searchResult.data.products.results[index].productName);
+                            return ProductPreviewTile(
+                              product: state
+                                  .searchResult.data.products.results[index],
+                            );
                           }),
                         ),
                       ),

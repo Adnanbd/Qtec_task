@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:qtec_task/Models/search_result.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
 import 'package:qtec_task/Widgets/custom_text_1.dart';
 import 'package:qtec_task/Widgets/custom_text_2.dart';
 import 'package:qtec_task/Widgets/custom_text_3.dart';
 
 class ProductPreviewTile extends StatefulWidget {
-  ProductPreviewTile({Key? key}) : super(key: key);
+  Result product;
+  ProductPreviewTile({Key? key, required this.product}) : super(key: key);
 
   @override
   State<ProductPreviewTile> createState() => _ProductPreviewTileState();
@@ -40,24 +42,29 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                     Container(
                       margin: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(.2),
+                        //color: Colors.red.withOpacity(.2),
                         borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(widget.product.image),
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
-                    Container(
+                    widget.product.stock == 0? Container(
                       margin: EdgeInsets.all(10),
-                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: CustomColors.stockOutTextBg,
-                    ),
-                    child: CustomText1(
-                      color: CustomColors.stockOutTextColor,
-                      fontSize: 14.0,
-                      text: "স্টকে নেই",
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: CustomColors.stockOutTextBg,
+                      ),
+                      child: CustomText1(
+                        color: CustomColors.stockOutTextColor,
+                        fontSize: 14.0,
+                        text: "স্টকে নেই",
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ):Container(),
                   ],
                 ),
               ),
@@ -69,7 +76,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                     CustomText1(
                       color: CustomColors.blackColor,
                       fontSize: 18,
-                      text: "Lays Classic Family Chips",
+                      text: widget.product.productName,
                       fontWeight: FontWeight.w500,
                     ),
                     Row(
@@ -86,7 +93,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                         CustomText2(
                           color: CustomColors.primaryTextColor,
                           fontSize: 18.0,
-                          text: "৳ 20.00",
+                          text: "৳ ${widget.product.charge.currentCharge}",
                           fontWeight: FontWeight.w700,
                         ),
                         Expanded(child: Container()),
@@ -112,7 +119,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                         CustomText2(
                           color: CustomColors.blackColor,
                           fontSize: 14.0,
-                          text: "৳ 25.00",
+                          text: "৳ ${widget.product.charge.sellingPrice}",
                           fontWeight: FontWeight.w500,
                         ),
                         Expanded(child: Container()),
@@ -128,7 +135,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                         CustomText2(
                           color: CustomColors.blackColor,
                           fontSize: 14.0,
-                          text: "৳ 5.00",
+                          text: "৳ ${widget.product.charge.profit}",
                           fontWeight: FontWeight.w500,
                         ),
                       ],
@@ -139,6 +146,8 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
             ],
           ),
         ),
+        widget.product.stock != 0 ? 
+        
         amount == 0
             ? GestureDetector(
                 onTap: () {
@@ -220,7 +229,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                     ),
                   ],
                 ),
-              ),
+              ):Container(),
       ],
     );
   }
