@@ -6,6 +6,10 @@ import 'package:qtec_task/Bloc/cubit/search_result_cubit.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
 import 'package:qtec_task/Utils/custom_values.dart';
 import 'package:qtec_task/Widgets/custom_search_bar.dart';
+import 'package:qtec_task/Widgets/custom_text_1.dart';
+import 'package:qtec_task/Widgets/custom_text_2.dart';
+import 'package:qtec_task/Widgets/custom_text_3.dart';
+import 'package:qtec_task/Widgets/product_preview_tile.dart';
 
 class SearchProductScreen extends StatelessWidget {
   const SearchProductScreen({Key? key}) : super(key: key);
@@ -41,28 +45,21 @@ class SearchProductScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: 30,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 3 / 5,
-                          mainAxisSpacing: 20
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: 30,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 3 / 5,
+                                  mainAxisSpacing: 10),
+                          itemBuilder: ((context, index) {
+                            return ProductPreviewTile();
+                          }),
                         ),
-                        itemBuilder: ((context, index) {
-                          return Container(
-                            margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: CustomColors.whiteColor,
-                              borderRadius: BorderRadius.circular(15)
-                            ),
-                            child: Column(
-                              children: [
-                                
-                              ],
-                            ),
-                          );
-                        }),
                       ),
                     ),
                   ),
