@@ -63,7 +63,7 @@ class Products {
   List<Result> results;
 
   factory Products.fromJson(Map<String, dynamic> json) => Products(
-        count: json["count"],
+        count: json["count"]??0,
         next: json["next"] ?? "",
         previous: json["previous"] ?? "",
         results:
@@ -156,7 +156,7 @@ class Result {
   List<dynamic> filterValue;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        id: json["id"],
+        id: json["id"] ?? 0,
         brand: Brand.fromJson(json["brand"]),
         image: json["image"] ?? "",
         charge: Charge.fromJson(json["charge"]),
@@ -170,20 +170,20 @@ class Result {
         description: json["description"] ?? "",
         note: json["note"] ?? "",
         embaddedVideoLink: json["embadded_video_link"] ?? "",
-        maximumOrder: json["maximum_order"],
-        stock: json["stock"],
-        isBackOrder: json["is_back_order"],
+        maximumOrder: json["maximum_order"] ?? 0,
+        stock: json["stock"] ?? 0,
+        isBackOrder: json["is_back_order"] ?? false,
         specification: json["specification"] ?? "",
         warranty: json["warranty"] ?? "",
-        preOrder: json["pre_order"],
-        productReview: json["product_review"],
-        isSeller: json["is_seller"],
-        isPhone: json["is_phone"],
-        willShowEmi: json["will_show_emi"],
+        preOrder: json["pre_order"] ?? false,
+        productReview: json["product_review"] ?? 0,
+        isSeller: json["is_seller"] ?? 0,
+        isPhone: json["is_phone"] ?? 0,
+        willShowEmi: json["will_show_emi"] ?? 0,
         badge: json["badge"] ?? "",
         isActive: json["is_active"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] != null? DateTime.parse(json["created_at"]) : DateTime.now(),
+        updatedAt: json["updated_at"] != null? DateTime.parse(json["updated_at"]): DateTime.now(),
         language: json["language"] ?? "",
         seller: json["seller"] ?? "",
         combo: json["combo"] ?? "",
@@ -249,10 +249,10 @@ class Brand {
   String slug;
 
   factory Brand.fromJson(Map<String, dynamic> json) => Brand(
-        name: json["name"],
-        image: json["image"],
+        name: json["name"] ?? "",
+        image: json["image"] ?? "",
         headerImage: json["header_image"] ?? "",
-        slug: json["slug"],
+        slug: json["slug"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -297,19 +297,19 @@ class Charge {
   dynamic message;
 
   factory Charge.fromJson(Map<String, dynamic> json) => Charge(
-        bookingPrice: json["booking_price"],
-        currentCharge: json["current_charge"],
-        discountCharge: json["discount_charge"] ?? "",
-        sellingPrice: json["selling_price"],
-        profit: json["profit"],
-        isEvent: json["is_event"],
-        eventId: json["event_id"] ?? "",
-        highlight: json["highlight"],
+        bookingPrice: json["booking_price"]?? 0,
+        currentCharge: json["current_charge"]?? 0,
+        discountCharge: json["discount_charge"] ?? 0,
+        sellingPrice: json["selling_price"]?? 0,
+        profit: json["profit"]?? 0,
+        isEvent: json["is_event"]?? 0,
+        eventId: json["event_id"] ?? 0,
+        highlight: json["highlight"]?? 0,
         highlightId: json["highlight_id"] ?? "",
-        groupping: json["groupping"],
+        groupping: json["groupping"]?? 0,
         grouppingId: json["groupping_id"] ?? "",
         campaignSectionId: json["campaign_section_id"] ?? "",
-        campaignSection: json["campaign_section"],
+        campaignSection: json["campaign_section"]?? 0,
         message: json["message"] ?? "",
       );
 
@@ -345,10 +345,10 @@ class Image {
   num product;
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
-        id: json["id"],
-        image: json["image"],
-        isPrimary: json["is_primary"],
-        product: json["product"],
+        id: json["id"]?? 0,
+        image: json["image"]?? "",
+        isPrimary: json["is_primary"]?? 0,
+        product: json["product"]?? 0,
       );
 
   Map<String, dynamic> toJson() => {

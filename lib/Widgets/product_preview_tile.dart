@@ -17,6 +17,12 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
   int amount = 0;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var heightMain = MediaQuery.of(context).size.height;
     var widthMain = MediaQuery.of(context).size.width;
@@ -24,6 +30,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
       alignment: Alignment.bottomCenter,
       children: [
         Container(
+          height: heightMain*.8,
           margin: const EdgeInsets.only(
             left: 10,
             right: 10,
