@@ -20,7 +20,7 @@ class CustomSeparator extends StatelessWidget {
               width: dashWidth,
               height: dashHeight,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: CustomColors.secondaryTextColor),
+                decoration: BoxDecoration(color: CustomColors.secondaryTextColor.withOpacity(.5)),
               ),
             );
           }),

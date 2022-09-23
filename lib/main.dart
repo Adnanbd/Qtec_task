@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_task/Bloc/cubit/cart_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/loading_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/pagination_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/product_cubit.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ProductDetailsCubit>(
           create: (context) => ProductDetailsCubit(httpService: httpService),
+        ),
+        BlocProvider<CartCubit>(
+          create: (context) => CartCubit(),
         ),
       ],
       child: MaterialApp(

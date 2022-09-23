@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_task/Bloc/cubit/cart_cubit.dart';
 import 'package:qtec_task/Models/search_result.dart';
 import 'package:qtec_task/Screens/prodcut_details_screen.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
@@ -15,8 +17,6 @@ class ProductPreviewTile extends StatefulWidget {
 }
 
 class _ProductPreviewTileState extends State<ProductPreviewTile> {
-  int amount = 0;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -27,6 +27,8 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
   Widget build(BuildContext context) {
     var heightMain = MediaQuery.of(context).size.height;
     var widthMain = MediaQuery.of(context).size.width;
+
+    var amount = context.watch<CartCubit>().getAmount(widget.product.slug);
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -34,7 +36,10 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProductDetailsScreen(slug: widget.product.slug,)),
+              MaterialPageRoute(
+                  builder: (context) => ProductDetailsScreen(
+                        slug: widget.product.slug,
+                      )),
             );
           },
           child: Container(
@@ -173,9 +178,10 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                 child: amount == 0
                     ? GestureDetector(
                         onTap: () {
-                          setState(() {
-                            amount = amount + 1;
-                          });
+                          print(amount);
+                          context
+                              .read<CartCubit>()
+                              .addProduct(widget.product.slug);
                         },
                         child: Container(
                           height: 36,
@@ -203,9 +209,9 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  amount = amount - 1;
-                                });
+                                context
+                              .read<CartCubit>()
+                              .removeProduct(widget.product.slug);
                               },
                               child: Container(
                                 height: 32,
@@ -230,9 +236,9 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  amount = amount + 1;
-                                });
+                                context
+                              .read<CartCubit>()
+                              .addProduct(widget.product.slug);
                               },
                               child: Container(
                                 height: 32,
