@@ -23,9 +23,6 @@ class SearchProductScreen extends StatefulWidget {
 
 class _SearchProductScreenState extends State<SearchProductScreen> {
   ScrollController _scrollController = ScrollController();
-
-  bool isLoading = false;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -68,13 +65,6 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
     }
   }
 
-  ////ADDING DATA INTO ARRAYLIST
-  void addItemIntoLisT(var pageCount) {
-    for (int i = (pageCount * 10) - 10; i < pageCount * 10; i++) {
-      //dataList.add(i);
-      //isLoading = false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +84,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            isLoading ? CircularProgressIndicator() : CustomSearchBar(),
+            CustomSearchBar(),
             SizedBox(
               height: 25,
             ),

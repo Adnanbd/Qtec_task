@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:qtec_task/Models/search_result.dart';
+import 'package:qtec_task/Models/single_product_response.dart';
 
 //https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=10&search=rice
 class HttpService {
@@ -24,6 +25,23 @@ class HttpService {
       }
     } catch (e) {
       throw Exception("111Error == $e");
+    }
+  }
+
+  Future<SingleProductResponse> getSingleProductDetails(String slug) async {
+    try {
+      var response = await http.get(Uri.parse("$baseUrl$productDetailsUrl$slug/"));
+      print("222 Status Code = ${response.statusCode}");
+      print("222 Body = ${response.body}");
+
+      if (response.statusCode == 200) {
+        SingleProductResponse result = SingleProductResponse.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+        return result;
+      } else {
+        throw "Unable to get the result";
+      }
+    } catch (e) {
+      throw Exception("222Error == $e");
     }
   }
 

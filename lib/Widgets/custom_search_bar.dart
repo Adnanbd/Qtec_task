@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qtec_task/Bloc/cubit/pagination_cubit.dart';
-import 'package:qtec_task/Bloc/cubit/product_list_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/search_result_cubit.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
 import 'package:qtec_task/Utils/custom_values.dart';
@@ -22,7 +21,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var paginationState = context.read<PaginationCubit>().state;
@@ -52,7 +50,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             borderRadius: CustomValues.textFieldBorderRadius,
           ),
           child: TextField(
-            autofocus: true,
+            autofocus: false,
             textAlign: TextAlign.left,
             cursorHeight: 20,
             style: GoogleFonts.balooDa2(
@@ -76,7 +74,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                     );
               }
             },
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              hintText: "কাঙ্ক্ষিত পণ্যটি খুঁজুন",
+              hintStyle: GoogleFonts.balooDa2(
+                color: CustomColors.secondaryTextColor,
+              ),
               fillColor: Colors.transparent,
               contentPadding: EdgeInsets.zero,
               border: InputBorder.none,
@@ -101,12 +103,12 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                         offset: 0,
                         searchText: paginationState.searchText,
                       );
-                      
+
                   context.read<PaginationCubit>().triggerSearchQuery(
-                      limit: 6,
-                      offset: 0,
-                      searchText: paginationState.searchText,
-                    );
+                        limit: 6,
+                        offset: 0,
+                        searchText: paginationState.searchText,
+                      );
                 }
               },
               child: SvgPicture.asset(
