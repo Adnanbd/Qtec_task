@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:qtec_task/Models/cart_item.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartInitial([]));
+  CartCubit() : super(CartInitial([],0));
 
   addProduct(String slug) {
     List<CartItem> cartItemList = state.cartItem;
@@ -18,7 +17,7 @@ class CartCubit extends Cubit<CartState> {
     });
 
     cartItemList.add(CartItem(amount: amount + 1, slug: slug));
-    emit(CartAdd(cartItemList));
+    emit(CartAdd(cartItemList,state.totalProduct+1));
   }
 
   removeProduct(String slug) {
@@ -30,9 +29,8 @@ class CartCubit extends Cubit<CartState> {
         cartItemList.remove(CartItem(amount: amount, slug: slug));
       }
     });
-
     cartItemList.add(CartItem(amount: amount - 1, slug: slug));
-    emit(CartAdd(cartItemList));
+    emit(CartAdd(cartItemList,state.totalProduct-1));
   }
 
   int getAmount(String slug) {

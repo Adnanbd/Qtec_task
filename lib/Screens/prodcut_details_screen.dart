@@ -37,7 +37,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     var widthMain = MediaQuery.of(context).size.width;
 
     var amount = context.watch<CartCubit>().getAmount(widget.slug);
-    
+
+    var totalProduct = context.watch<CartCubit>().state.totalProduct;
+
     return Scaffold(
       backgroundColor: CustomColors.mainBackgroundColor,
       appBar: AppBar(
@@ -239,7 +241,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   color: CustomColors
                                                       .primaryTextColor,
                                                   fontSize: 22,
-                                                  text: "৳ ${product.charge.currentCharge}",
+                                                  text:
+                                                      "৳ ${product.charge.currentCharge}",
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ],
@@ -265,7 +268,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   color:
                                                       CustomColors.blackColor,
                                                   fontSize: 18,
-                                                  text: "৳ ${product.charge.sellingPrice}",
+                                                  text:
+                                                      "৳ ${product.charge.sellingPrice}",
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ],
@@ -292,7 +296,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   color:
                                                       CustomColors.blackColor,
                                                   fontSize: 18,
-                                                  text: "৳ ${product.charge.profit}",
+                                                  text:
+                                                      "৳ ${product.charge.profit}",
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ],
@@ -356,20 +361,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   width: 1.5,
                                                 ),
                                               ),
-                                              child: BlocBuilder<CartCubit,
-                                                  CartState>(
-                                                builder: (context, state) {
-                                                  
-                                                  
-                                                  return CustomText2(
+                                              child: CustomText2(
                                                     color: CustomColors
                                                         .primaryTextColor,
                                                     fontSize: 14,
-                                                    text: amount.toString(),
+                                                    text: totalProduct.toString(),
                                                     fontWeight: FontWeight.w600,
-                                                  );
-                                                },
-                                              ),
+                                                  ),
                                             ),
                                           ),
                                     amount == 0
