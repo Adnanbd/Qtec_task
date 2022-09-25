@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qtec_task/Bloc/cubit/cart_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/loading_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/pagination_cubit.dart';
-import 'package:qtec_task/Bloc/cubit/product_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/product_details_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/search_result_cubit.dart';
 import 'package:qtec_task/Screens/search_product_screen.dart';

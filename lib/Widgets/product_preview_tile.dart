@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qtec_task/Bloc/cubit/cart_cubit.dart';
 import 'package:qtec_task/Models/search_result.dart';
-import 'package:qtec_task/Screens/prodcut_details_screen.dart';
+import 'package:qtec_task/Screens/product_details_screen.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
 import 'package:qtec_task/Widgets/custom_text_1.dart';
 import 'package:qtec_task/Widgets/custom_text_2.dart';
 import 'package:qtec_task/Widgets/custom_text_3.dart';
 
 class ProductPreviewTile extends StatefulWidget {
-  Result product;
-  ProductPreviewTile({Key? key, required this.product}) : super(key: key);
+  final Result product;
+  const ProductPreviewTile({Key? key, required this.product}) : super(key: key);
 
   @override
   State<ProductPreviewTile> createState() => _ProductPreviewTileState();
@@ -19,7 +19,6 @@ class ProductPreviewTile extends StatefulWidget {
 class _ProductPreviewTileState extends State<ProductPreviewTile> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -34,6 +33,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
       children: [
         GestureDetector(
           onTap: () {
+            
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -60,7 +60,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                     alignment: Alignment.topRight,
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           //color: Colors.red.withOpacity(.2),
                           borderRadius: BorderRadius.circular(10),
@@ -72,7 +72,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                       ),
                       widget.product.stock == 0
                           ? Container(
-                              margin: EdgeInsets.all(10),
+                              margin: const EdgeInsets.all(10),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               decoration: BoxDecoration(
@@ -109,7 +109,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                             text: "ক্রয়",
                             fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           CustomText2(
@@ -122,7 +122,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                           CustomText3(
                             color: CustomColors.primaryTextColor,
                             fontSize: 14.0,
-                            text: "৳ 22.00",
+                            text: "৳ ${widget.product.charge.currentCharge+widget.product.charge.discountCharge}",
                             fontWeight: FontWeight.w500,
                           ),
                         ],
@@ -135,7 +135,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                             text: "বিক্রয়",
                             fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           CustomText2(
@@ -151,7 +151,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                             text: "লাভ",
                             fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           CustomText2(
@@ -171,14 +171,14 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
         ),
         widget.product.stock != 0
             ? AnimatedSwitcher(
-                duration: Duration(milliseconds: 100),
+                duration: const Duration(milliseconds: 100),
                 transitionBuilder: ((child, animation) {
                   return ScaleTransition(scale: animation, child: child);
                 }),
                 child: amount == 0
                     ? GestureDetector(
                         onTap: () {
-                          print(amount);
+                          //print(amount);
                           context
                               .read<CartCubit>()
                               .addProduct(widget.product.slug);
@@ -200,7 +200,7 @@ class _ProductPreviewTileState extends State<ProductPreviewTile> {
                       )
                     : Container(
                         width: widthMain * .4,
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             color: CustomColors.counterButtonBg,
                             borderRadius: BorderRadius.circular(20)),

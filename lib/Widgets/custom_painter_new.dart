@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-class RPSCustomPainter extends CustomPainter {
+class CustomPainterNew extends CustomPainter {
     @override
     void paint(Canvas canvas, Size size) {
             
@@ -23,7 +23,7 @@ Path path_0 = Path();
     path_0.close();
 
 Paint paint_0_fill = Paint()..style=PaintingStyle.fill;
-paint_0_fill.shader = ui.Gradient.linear(Offset(size.width*0.4936709,size.height*-16.46814), Offset(size.width*0.5000000,size.height*2.160895), [Color(0xff6210E1).withOpacity(1),Color(0xff1400AE).withOpacity(1)], [0.223536,0.555821]);
+paint_0_fill.shader = ui.Gradient.linear(Offset(size.width*0.4936709,size.height*-16.46814), Offset(size.width*0.5000000,size.height*2.160895), [const Color(0xff6210E1).withOpacity(1),const Color(0xff1400AE).withOpacity(1)], [0.223536,0.555821]);
 canvas.drawPath(path_0,paint_0_fill);
 
 }

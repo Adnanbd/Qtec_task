@@ -1,8 +1,3 @@
-// To parse this JSON data, do
-//
-//     final singleProductResponse = singleProductResponseFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:qtec_task/Models/search_result.dart';

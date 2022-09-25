@@ -14,8 +14,8 @@ class HttpService {
   Future<SearchResult> getHomeResponse(int limit, int offset, String searchText) async {
     try {
       var response = await http.get(Uri.parse("$baseUrl${searchUrl}limit=$limit&offset=$offset&search=$searchText"));
-      print("111 Status Code = ${response.statusCode}");
-      print("111 Body = ${response.body}");
+      //print("111 Status Code = ${response.statusCode}");
+      //print("111 Body = ${response.body}");
 
       if (response.statusCode == 200) {
         SearchResult result = SearchResult.fromJson(json.decode(utf8.decode(response.bodyBytes)));
@@ -31,8 +31,8 @@ class HttpService {
   Future<SingleProductResponse> getSingleProductDetails(String slug) async {
     try {
       var response = await http.get(Uri.parse("$baseUrl$productDetailsUrl$slug/"));
-      print("222 Status Code = ${response.statusCode}");
-      print("222 Body = ${response.body}");
+      //print("222 Status Code = ${response.statusCode}");
+      //print("222 Body = ${response.body}");
 
       if (response.statusCode == 200) {
         SingleProductResponse result = SingleProductResponse.fromJson(json.decode(utf8.decode(response.bodyBytes)));

@@ -5,10 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qtec_task/Bloc/cubit/pagination_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/search_result_cubit.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
-import 'package:qtec_task/Utils/custom_values.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  CustomSearchBar({Key? key}) : super(key: key);
+  const CustomSearchBar({Key? key}) : super(key: key);
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -19,13 +18,12 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var paginationState = context.read<PaginationCubit>().state;
       if (paginationState is PaginationTrigger) {
-        print("Searched Text Found = " + paginationState.searchText);
+        
         searchTextEditingController.text = paginationState.searchText;
       }
     });
@@ -33,7 +31,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    var heightMain = MediaQuery.of(context).size.height;
+    
     var widthMain = MediaQuery.of(context).size.width;
     var paginationState = context.watch<PaginationCubit>().state;
     return Stack(
@@ -47,7 +45,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: CustomColors.whiteColor,
-            borderRadius: CustomValues.textFieldBorderRadius,
+            borderRadius: BorderRadius.circular(15),
           ),
           child: TextField(
             autofocus: false,
@@ -59,7 +57,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             ),
             controller: searchTextEditingController,
             onChanged: (value) {
-              print("Typed => $value");
+              //print("Typed => $value");
               if (paginationState is PaginationTrigger) {
                 context.read<PaginationCubit>().triggerSearchQuery(
                       limit: 6,

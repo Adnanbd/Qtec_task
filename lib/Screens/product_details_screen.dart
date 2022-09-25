@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:qtec_task/Bloc/cubit/cart_cubit.dart';
 import 'package:qtec_task/Bloc/cubit/product_details_cubit.dart';
 import 'package:qtec_task/Utils/custom_colors.dart';
@@ -13,11 +12,12 @@ import 'package:qtec_task/Widgets/custom_text_1.dart';
 import 'package:qtec_task/Widgets/custom_text_2.dart';
 import 'package:qtec_task/Widgets/html_parser.dart';
 import 'package:qtec_task/Widgets/product_details_image.dart';
-import 'package:qtec_task/Widgets/ssasd.dart';
+import 'package:qtec_task/Widgets/custom_painter_new.dart';
+
 
 class ProductDetailsScreen extends StatefulWidget {
-  String slug;
-  ProductDetailsScreen({Key? key, required this.slug}) : super(key: key);
+  final String slug;
+  const ProductDetailsScreen({Key? key, required this.slug}) : super(key: key);
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -26,7 +26,6 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<ProductDetailsCubit>().getSingleProductDetails(widget.slug);
   }
@@ -74,8 +73,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomSearchBar(),
-            SizedBox(
+            const CustomSearchBar(),
+            const SizedBox(
               height: 25,
             ),
             BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
@@ -88,15 +87,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        LoadingAnimationWidget.discreteCircle(
-                          secondRingColor: Color(0xFF1400AE),
-                          thirdRingColor: Color(0xFF6210E1),
-                          color: Color.fromARGB(255, 90, 74, 115),
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        
                         CustomText1(
                           color: CustomColors.blackColor,
                           fontSize: 12,
@@ -107,14 +98,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                   );
                 } else if (state is ProductDetailsLoaded) {
-                  print("loaded");
+                  
                   var product = state.singleProductResponse.data;
                   return Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
                           //Text(state.singleProductResponse.data.productName),
-                          Container(
+                          SizedBox(
                             width: widthMain,
                             child: CarouselSlider(
                               options: CarouselOptions(
@@ -137,7 +128,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             alignment: Alignment.bottomCenter,
                             children: [
                               Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     left: 20, top: 25, right: 20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,7 +160,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   color:
                                                       CustomColors.blackColor,
                                                   fontSize: 16,
-                                                  text: "${product.brand.name}",
+                                                  text: product.brand.name,
                                                   fontWeight: FontWeight.w400,
                                                 )
                                               : Container(),
@@ -203,7 +194,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                   color:
                                                       CustomColors.blackColor,
                                                   fontSize: 16,
-                                                  text: "${product.seller}",
+                                                  text: product.seller,
                                                   fontWeight: FontWeight.w400,
                                                 )
                                               : Container(),
@@ -218,7 +209,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       ),
                                       child: Column(
                                         children: [
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
                                           Padding(
@@ -275,7 +266,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                               ],
                                             ),
                                           ),
-                                          CustomSeparator(),
+                                          const CustomSeparator(),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 20, vertical: 10),
@@ -308,7 +299,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                     Container(
                                       height: 54,
-                                      padding: EdgeInsets.only(bottom: 0),
+                                      padding: const EdgeInsets.only(bottom: 0),
                                       alignment: Alignment.bottomLeft,
                                       child: CustomText1(
                                         color: CustomColors.blackColor,
@@ -339,7 +330,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             90,
                                             (90 * 1.0886075949367089)
                                                 .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                                        painter: RPSCustomPainter(),
+                                        painter: CustomPainterNew(),
                                       ),
                                     ),
                                     amount == 0
@@ -399,7 +390,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                 width: 28,
                                                 fit: BoxFit.contain,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               CustomText1(
@@ -419,7 +410,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       bottom: 110,
                                       child: Container(
                                         width: widthMain * .4,
-                                        padding: EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(5),
                                         decoration: BoxDecoration(
                                             color: CustomColors.counterButtonBg,
                                             borderRadius:
@@ -488,7 +479,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ],
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding:const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -502,7 +493,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     height: 1.5,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 80,
                                 ),
                               ],
