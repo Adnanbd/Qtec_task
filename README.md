@@ -1,5 +1,5 @@
 ## 📖  QTEC TASK
-- A simple comic reading app using REST API with Flutter.
+- A simple app to search product & see details of a product.
 
 ## 🌈 Features 
 
